@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controllers.hub.HubController">
+    <GridPane fx:id="song_item" gridLinesVisible="true">
+        <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+        <children>
+            <Label fx:id="song_title" prefHeight="17.0" prefWidth="144.0" text="song">
+            <padding>
+               <Insets left="5.0" />
+            </padding></Label>
+            <Label fx:id="song_artist" prefHeight="17.0" prefWidth="146.0" text="artist" GridPane.columnIndex="1">
+            <padding>
+               <Insets left="5.0" />
+            </padding></Label>
+            <Label fx:id="song_duration" prefHeight="17.0" prefWidth="143.0" text="duration" GridPane.columnIndex="2">
+            <padding>
+               <Insets left="5.0" />
+            </padding></Label>
+        </children>
+    </GridPane>
+</AnchorPane>
