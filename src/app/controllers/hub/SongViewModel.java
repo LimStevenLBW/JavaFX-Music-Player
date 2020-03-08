@@ -3,14 +3,13 @@ package app.controllers.hub;
 
 import app.models.Song;
 import javafx.beans.property.StringProperty;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.net.URL;
@@ -46,6 +45,25 @@ public class SongViewModel extends GridPane implements Initializable {
         song_title.textProperty().bind(song.getName());
         song_artist.textProperty().bind(song.getArtist());
         song_duration.textProperty().bind(song.getDuration());
+        addMouseEventListener();
+    }
+
+    /**
+     * Connects the handler method reference to our event and adds it to the current node
+     */
+    private void addMouseEventListener() {
+        EventHandler<MouseEvent> eventHandler = this::handlePlaySelectedSong;
+        this.addEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler);
+    }
+
+    /**
+     * Plays the selected song
+     * @param event
+     * @throws IOException
+     */
+    @FXML
+    private void handlePlaySelectedSong(MouseEvent event){
+        System.out.println("Playing");
     }
 
 }
