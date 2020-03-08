@@ -52,8 +52,8 @@ public class SongViewModel extends GridPane implements Initializable {
      * Connects the handler method reference to our event and adds it to the current node
      */
     private void addMouseEventListener() {
-        EventHandler<MouseEvent> eventHandler = this::handlePlaySelectedSong;
-        this.addEventFilter(MouseEvent.MOUSE_CLICKED, eventHandler);
+        EventHandler<MouseEvent> eventListener = this::handlePlaySelectedSong;
+        this.addEventFilter(MouseEvent.MOUSE_CLICKED, eventListener);
     }
 
     /**
