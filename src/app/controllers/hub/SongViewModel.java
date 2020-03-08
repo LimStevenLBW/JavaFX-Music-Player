@@ -16,8 +16,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class SongViewModel extends AnchorPane implements Initializable {
-    @FXML private GridPane song_item;
+public class SongViewModel extends GridPane implements Initializable {
     @FXML private Label song_title;
     @FXML private Label song_artist;
     @FXML private Label song_duration;
