@@ -2,7 +2,6 @@ package app.controllers.hub;
 
 import app.FxController;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 
 /**
@@ -32,7 +31,7 @@ public class EntryController extends FxController {
             loadNewScene("../../views/Hub.fxml");
         }
         catch(IOException ex){
-            System.out.println(ex);
+            ex.printStackTrace();
         }
     }
 

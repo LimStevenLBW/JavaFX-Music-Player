@@ -1,34 +1,41 @@
 package app.models;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 public class Song {
-    private String name;
-    private String artist;
-    private String duration;
+    private StringProperty name = new SimpleStringProperty();
+    private StringProperty artist = new SimpleStringProperty();
+    private StringProperty duration = new SimpleStringProperty();
 
     private String artwork;
     private String releaseDate;
 
+    public Song(){
+
+    }
+
     public Song(String name, String artist, String duration) {
-        this.name = name;
-        this.artist = artist;
-        this.duration = duration;
+        this.name.setValue(name);
+        this.artist.setValue(artist);
+        this.duration.setValue(duration);
     }
 
     public Song(String name, String artist, String duration, String artwork, String releaseDate) {
-        this.name = name;
-        this.artist = artist;
-        this.duration = duration;
+        //this.name = name;
+        //this.artist = artist;
+        //this.duration = duration;
     }
 
-    public String getName() {
+    public StringProperty getName() {
         return name;
     }
 
-    public String getArtist() {
+    public StringProperty getArtist() {
         return artist;
     }
 
-    public String getDuration() {
+    public StringProperty getDuration() {
         return duration;
     }
 }

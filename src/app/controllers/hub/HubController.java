@@ -38,8 +38,8 @@ public class HubController extends FxController{
     private ArrayList<Song> getSongLibrary(){
         ArrayList<Song> mySongs = new ArrayList<Song>(); //Collection of songs
         mySongs.add(new Song("name1", "artist1", "duration1"));
-        mySongs.add(new Song("name2", "artist2", "duration2"));
-        mySongs.add(new Song("name3", "artist3", "duration3"));
+        //mySongs.add(new Song("name2", "artist2", "duration2"));
+        //mySongs.add(new Song("name3", "artist3", "duration3"));
         return mySongs;
     }
 
@@ -49,9 +49,8 @@ public class HubController extends FxController{
     private void renderObservableSongs(ArrayList<Song> mySongs){
         observableSongs = song_list.getChildren();
         for(Song song: mySongs){
-            //GridPane newItem = new GridPane();
-
-            //observableSongs.add(newItem);
+            SongViewModel viewableSong = new SongViewModel(song);
+            observableSongs.add(viewableSong);
         }
 
     }
