@@ -2,6 +2,7 @@ package app.models;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.ObservableMap;
 import javafx.scene.media.Media;
 
 /**
@@ -15,6 +16,9 @@ import javafx.scene.media.Media;
  */
 public class Song {
     private Media media;
+    private ObservableMap<String, Object> metadata;
+    private String songPath;
+
     private StringProperty name = new SimpleStringProperty();
     private StringProperty artist = new SimpleStringProperty();
     private StringProperty duration = new SimpleStringProperty();
@@ -24,12 +28,29 @@ public class Song {
 
     /**
      * Instantiate a new song based on a uri path
-     * @param musicPath
+     * @param songPath
      */
-    public Song(String musicPath){
-        this.name.setValue(musicPath);
-        this.artist.setValue("test");
-        this.duration.setValue("test");
+    public Song(String songPath){
+        this.songPath = songPath;
+
+        /**
+         * The media information is obtained asynchronously and so not necessarily available immediately after instantiation of the class.
+         * All information should however be available if the instance has been associated with a MediaPlayer
+         * and that player has transitioned to Status.READY status
+         */
+        try{
+            media = new Media(songPath); //using JavaFx Media
+            metadata = media.getMetadata();
+        }
+        catch(Exception ex){
+            System.out.println("Could not initialize the media at path: " + songPath);
+        }
+
+        //media.getMetadata().forEach((key, value) -> System.out.println(key + ":" + value));
+        //name.setValue((String)metadata.get("title"));
+        //System.out.println(metadata.get("title"));
+        //this.artist.setValue((String)metadata.get("artist"));
+        //this.duration.setValue("test");
     }
 
     /**
@@ -50,6 +71,10 @@ public class Song {
         //this.duration = duration;
     }
 
+    public String getPath(){
+        return songPath;
+    }
+
     public StringProperty getName() {
         return name;
     }
@@ -60,5 +85,9 @@ public class Song {
 
     public StringProperty getDuration() {
         return duration;
+    }
+
+    public Media getMedia(){
+        return media;
     }
 }

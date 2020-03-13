@@ -27,7 +27,7 @@ public class Playlist {
         return myPlaylist;
     }
 
-    public void add(String musicPath){
+    public void addNewSong(String musicPath){
         Song song = new Song(musicPath);
         myPlaylist.add(song);
     }
