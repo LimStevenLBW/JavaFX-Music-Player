@@ -1,0 +1,21 @@
+ABSTRACT:
+This experiment served the purpose of introducing terms and methods which are used in the statistical analysis of physical measurements.
+ The experiment will use calipers to measure washer disks, in which the students will use as data for the population and sample size.
+ This would serve as the means in which the students are able to extract quantitative information from the experiment. 
+By doing physical measurements in this experiment, students are able to gather information through repetition, and establish a method 
+in which the experiment will be carried to ensure accuracy, precision, and tendencies of data. Through these observations, 
+students can determine the average of the data sample and thus figure out the variance that allows one to determine how much 
+a group differs from their average. The Z-test, T-test, standard deviation, and RMS deviation from the mean are all theoretical 
+equations that assist in determining the accuracy of the sample data.
+Since the sample data was taken randomly from the entirety of the data set, it will accurately reflect the population data.
+ There will be no significant difference between the sample data and the population data.
+INTRODUCTION:
+In this experiment, groups of students measured the diameter of a metallic washer disk using a digital caliper.
+ Afterwards, the data is shared amongst the class in order to collect the entire data set.
+ A sample data of five data points is selected from a population data of 46 data points. 
+This data will be used to determine if a sample data can accurately reflect the population data.
+    After placing sample data and population data into an excel spreadsheet, multiple excel functions are used to understand the 
+significance and accuracy of these measurements. These functions include: range, midrange, mean, mode, median, average deviation 
+from the mean, RMS deviation from the mean, standard deviation from the mean, Z-test, and T-test assuming unequal variance. 
+These functions serve the purpose of demonstrating advanced methods of statistical analysis to better understand recorded data. 
+These calculations provide values that illustrate accuracy, precision, and tendencies of data.

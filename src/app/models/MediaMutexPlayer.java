@@ -1,23 +1,18 @@
 package app.models;
 
-import javafx.collections.ObservableMap;
-import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
 /**
- * Singleton class wrapper for the fx mediaplayer
+ * Singleton class wrapper for the fx media player
  */
 public class MediaMutexPlayer {
     private static MediaMutexPlayer single_instance = null;
-
+    private MediaPlayer activePlayer;
     private OnCurrentSongEventListener songEventListener;
     private boolean isSongPlaying;
     private double volume = 0.1;
-    private MediaPlayer mediaPlayer;
 
-    private MediaMutexPlayer(){
-
-    }
+    private MediaMutexPlayer(){}
 
     public static MediaMutexPlayer getInstance() {
         if(single_instance == null){
@@ -31,13 +26,11 @@ public class MediaMutexPlayer {
     }
 
     public void playSong(Song song){
-        if(isSongPlaying) {
-            stopSong();
-        }
+        if(isSongPlaying) { stopSong(); }
 
-        mediaPlayer = new MediaPlayer(song.getMedia());
-        mediaPlayer.setVolume(volume);
-        mediaPlayer.play();
+        activePlayer = song.getMediaPlayer();
+        activePlayer.setVolume(volume);
+        activePlayer.play();
         isSongPlaying = true;
 
         songEventListener.onCurrentSongNameUpdate(song.getName());
@@ -45,7 +38,7 @@ public class MediaMutexPlayer {
     }
 
     public void stopSong(){
-        mediaPlayer.stop();
+        activePlayer.stop();
         isSongPlaying = false;
     }
 

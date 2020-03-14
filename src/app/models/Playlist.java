@@ -1,6 +1,5 @@
 package app.models;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -14,6 +13,7 @@ public class Playlist {
         name = "Library";
         myPlaylist = new ArrayList<Song>();
     }
+
     public Playlist(ArrayList<Song> myPlaylist){
         name = "Library";
         this.myPlaylist = myPlaylist;

@@ -2,8 +2,10 @@ package app.models;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableMap;
 import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 /**
  * The basic steps required to play media in Java FX are:
@@ -14,7 +16,9 @@ import javafx.scene.media.Media;
  * 5. Add the MediaView to the scene graph.
  * 6. Invoke MediaPlayer.play().
  */
-public class Song {
+public class Song implements MapChangeListener<String, Object> {
+    //Every song needs to be associated with a mediaplayer object to initialize its data
+    private MediaPlayer mediaPlayer;
     private Media media;
     private ObservableMap<String, Object> metadata;
     private String songPath;
@@ -30,27 +34,30 @@ public class Song {
      * Instantiate a new song based on a uri path
      * @param songPath
      */
-    public Song(String songPath){
+    public Song(String songPath) {
         this.songPath = songPath;
+        MapChangeListener<String, Object> listenerObj = this;
 
         /**
          * The media information is obtained asynchronously and so not necessarily available immediately after instantiation of the class.
          * All information should however be available if the instance has been associated with a MediaPlayer
          * and that player has transitioned to Status.READY status
          */
-        try{
-            media = new Media(songPath); //using JavaFx Media
-            metadata = media.getMetadata();
+        try {
+            media = new Media(songPath); //using JavaFx Media, create from the address of the song file
+
+            mediaPlayer = new MediaPlayer(media);
+            mediaPlayer.setOnReady(() -> {
+                metadata = media.getMetadata();
+                metadata.addListener(listenerObj);
+                name.setValue((String) metadata.get("title"));
+                artist.setValue((String) metadata.get("artist"));
+                duration.setValue(media.getDuration().toString());
+            });
         }
         catch(Exception ex){
             System.out.println("Could not initialize the media at path: " + songPath);
         }
-
-        //media.getMetadata().forEach((key, value) -> System.out.println(key + ":" + value));
-        //name.setValue((String)metadata.get("title"));
-        //System.out.println(metadata.get("title"));
-        //this.artist.setValue((String)metadata.get("artist"));
-        //this.duration.setValue("test");
     }
 
     /**
@@ -89,5 +96,29 @@ public class Song {
 
     public Media getMedia(){
         return media;
+    }
+
+    public MediaPlayer getMediaPlayer() { return mediaPlayer; }
+
+    /**
+     * Tracks updates to the observable metadata map and updates song fields conditionally
+     * @param change - an object representing an elementary change to the observable list
+     */
+    @Override
+    public void onChanged(Change<? extends String, ?> change) {
+        change.getKey(); //Get the key associated with what changed
+        if(change.wasAdded()){ //If a new value was added
+            String key = change.getKey();
+
+            if(key.equals("title")){
+                name.setValue((String)change.getValueAdded());
+            }
+            else if(key.equals("artist")){
+                artist.setValue((String)change.getValueAdded());
+            }
+            else{
+                //System.out.println(change.getValueAdded());
+            }
+        }
     }
 }

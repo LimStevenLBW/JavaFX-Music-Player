@@ -1,7 +1,6 @@
 package app.controllers.hub;
 
 import app.models.MediaMutexPlayer;
-import app.models.OnCurrentSongEventListener;
 import app.models.Song;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -10,22 +9,21 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import javafx.scene.media.Media;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class SongViewModel extends GridPane implements Initializable {
+
     @FXML private Label song_title;
     @FXML private Label song_artist;
     @FXML private Label song_duration;
+
     private MediaMutexPlayer mediaMutexPlayer;
     private Song song;
 
-    public SongViewModel(){
-
-    }
+    public SongViewModel(){ }
 
     public SongViewModel(Song song) {
         this.song = song; //Init Song
