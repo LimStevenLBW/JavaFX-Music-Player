@@ -6,6 +6,7 @@ import javafx.collections.MapChangeListener;
 import javafx.collections.ObservableMap;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.util.Duration;
 
 /**
  * The basic steps required to play media in Java FX are:
@@ -50,9 +51,10 @@ public class Song implements MapChangeListener<String, Object> {
             mediaPlayer.setOnReady(() -> {
                 metadata = media.getMetadata();
                 metadata.addListener(listenerObj);
+
                 name.setValue((String) metadata.get("title"));
                 artist.setValue((String) metadata.get("artist"));
-                duration.setValue(media.getDuration().toString());
+                setDuration(media.getDuration());
             });
         }
         catch(Exception ex){
@@ -100,6 +102,21 @@ public class Song implements MapChangeListener<String, Object> {
 
     public MediaPlayer getMediaPlayer() { return mediaPlayer; }
 
+    private void setDuration(Duration duration){
+        double seconds = duration.toSeconds() % 60;
+        String formattedSeconds = String.format("%f", seconds);
+
+        if(formattedSeconds.length() < 2 || formattedSeconds.charAt(1) == '.') {
+            formattedSeconds = formattedSeconds.substring(0, 1);
+            formattedSeconds = String.format("0%s", formattedSeconds);
+        }
+        else
+            formattedSeconds = formattedSeconds.substring(0, 2);
+
+        int mins = (int)duration.toSeconds() / 60;
+        this.duration.setValue(String.format("%d: %s", mins, formattedSeconds));
+    }
+
     /**
      * Tracks updates to the observable metadata map and updates song fields conditionally
      * @param change - an object representing an elementary change to the observable list
@@ -110,13 +127,13 @@ public class Song implements MapChangeListener<String, Object> {
         if(change.wasAdded()){ //If a new value was added
             String key = change.getKey();
 
-            if(key.equals("title")){
+            if(key.equals("title")) {
                 name.setValue((String)change.getValueAdded());
             }
-            else if(key.equals("artist")){
+            else if(key.equals("artist")) {
                 artist.setValue((String)change.getValueAdded());
             }
-            else{
+            else {
                 //System.out.println(change.getValueAdded());
             }
         }
